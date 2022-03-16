@@ -49,42 +49,36 @@
 </body>
 
 <script>
-    function makeNewDiv() {
-        /* make the div and its text */
-        let element = document.createElement("div")
-        element.innerHTML = document.getElementById("form_text").value;
-        element.setAttribute('class', 'queue');
-        element.style.color = "orange"
+    var myTime = undefined
+    function recordReact() {
+      myTime = Date.now();
+      console.log("Current time in milliseconds is " + myTime)
 
-        /* add it to the container */
-        let container = document.getElementById('target')
-        container.insertBefore(element, container.firstChild);
     }
 
-    function fetchItem() {
-        queueItems = document.getElementsByClassName('queue');
-        var len = queueItems.length;
-        if (len > 0) {
-            for (let i = 0; i < len; i++) {
-                queueItems[len - 1].remove();
-            }
+
+    var c = Math.floor(Math.random() * 9)+2;
+    function startTime() {
+      for (let i = 0; i < c+1; i++) {
+        setTimeout(() => {
+          document.getElementById('countdown').innerHTML = i
+        }, (c - i) * 1000)
+      }
+
+      setTimeout(() => {
+
+        if (myTime == undefined) {
+          document.getElementById('target').innerHTML = "Too Slow"
         }
-    }
-
-    function zap() {
-        var queueItems = document.getElementsByClassName("queue")
-        var len = queueItems.length;
-        var item = document.getElementById("form_text").value;
-        for (let i = 0; i < len; i++) {
-            if (item == queueItems[i].innerHTML) {
-                queueItems[i].remove();
-                console.log("We are getting rid of all the elements with that text");
-            }
+        else {
+          var buttonTime = Date.now()
+          document.getElementById('target').innerHTML = "Time was " + (buttonTime - myTime)
         }
+      }, 3000)
     }
 
-    
+  </script>
 
-</script>
+</body>
 
 </html>
